@@ -197,6 +197,7 @@ tomcat コンテナの再起動を行う場合、compose のプロジェクト�
 war をビルドしただけでは war のデプロイがなされない事を実感してもらうために、上記 `docker exec ...` コマンドに関して手順を記載しましたが、war のリビルド、及び、tomcat コンテナの再起動をする場合は以下を実行すれば OK です。
 
 ```shell
+chmod +x rebuild.sh
 ./rebuild.sh
 ```
 

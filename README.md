@@ -213,6 +213,7 @@ Rather than restarting it manually (and deleting deployed app directories), you 
 Although the above `docker exec ...` is shown to demonstrate the issue, normally you'd just run:
 
 ```sh
+chmod +x rebuild.sh
 ./rebuild.sh
 ```
 
