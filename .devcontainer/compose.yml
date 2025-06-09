@@ -1,0 +1,55 @@
+volumes:
+  mariadb-data:
+
+services:
+  dev:
+    container_name: javadev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      TZ: Asia/Tokyo
+      JAVA_HOME: /opt/java/openjdk/
+    volumes:
+      - ../..:/workspaces:cached
+    working_dir: /workspaces/${PROJECT_NAME}
+    command: sleep infinity
+    networks:
+      - app-network
+  db:
+    container_name: mariadb
+    image: mariadb:latest
+    restart: unless-stopped
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    environment:
+      TZ: Asia/Tokyo
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: passwd
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: myapp
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+  tomcat:
+    container_name: tomcat
+    image: tomcat:10.1
+    ports:
+      - "8080:8080"
+      - "8000:8000"  # for debug
+    volumes:
+      - ../..:/workspaces:cached
+      - ../target/:/usr/local/tomcat/webapps/:cached
+    environment:
+      TZ: Asia/Tokyo
+      JAVA_TOOL_OPTIONS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000
+    depends_on:
+      - db
+      - dev
+    networks:
+      - app-network
+
+networks:
+  app-network:

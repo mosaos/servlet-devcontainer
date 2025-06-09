@@ -1,0 +1,13 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Rebuild WAR",
+      "type": "shell",
+      "command": "${workspaceFolder}/rebuild.sh",
+      "problemMatcher": [],
+      "group": "build",
+      "detail": "Rebuild WAR and restart tomcat container"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+{
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "remote.containers.dockerPath": "/usr/bin/docker"
+}

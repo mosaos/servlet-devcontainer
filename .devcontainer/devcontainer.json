@@ -1,0 +1,21 @@
+{
+  "name": "Java & MariaDB & Tomcat",
+  "dockerComposeFile": "compose.yml",
+  "service": "dev",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "customizations": {
+    "vscode": {
+      "extensions": ["vscjava.vscode-java-pack", "ms-azuretools.vscode-docker"],
+      "settings": {
+        "java.configuration.updateBuildConfiguration": "interactive"
+      }
+    }
+  },
+  "forwardPorts": [8080, 3306],
+  // "postCreateCommand": "mvn clean install",
+  "postCreateCommand": "cd /workspaces/${localWorkspaceFolderBasename} && echo 'Dev Container 起動 OK !'",
+  "remoteUser": "root",
+  "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+  ]
+}
